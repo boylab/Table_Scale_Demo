@@ -11,8 +11,8 @@
         android:theme="@style/Theme.Table_Scale_Demo">
         <activity android:name=".login.activity.UpdateActivity"></activity>
         <activity android:name=".login.activity.LoginActivity" />
-        <activity android:name=".home.activity.MainActivity" />
-        <activity android:name=".login.activity.StartUpActivity">
+        <activity android:name=".login.activity.StartUpActivity" />
+        <activity android:name=".home.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

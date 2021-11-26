@@ -3,6 +3,7 @@ package com.boylab.tablescale.base.utils;
 import java.util.HashMap;
 
 public class Config {
+
     /**
      * 数值 0 1 2 3 4 5 6 7 8
      * 含义 kg g t lb N kN mL L kL

@@ -1,4 +1,4 @@
-package com.boylab.tablescale.base.modbus;
+package com.boylab.tablescale.base.modbus.data;
 
 public class WeighSign1 {
 

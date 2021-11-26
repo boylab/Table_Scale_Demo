@@ -1,5 +1,6 @@
-package com.boylab.tablescale.base.modbus;
+package com.boylab.tablescale.base.modbus.data;
 
+import com.boylab.tablescale.base.modbus.socket.ModbusEngine;
 import com.gotokeep.keep.taira.TairaData;
 import com.gotokeep.keep.taira.annotation.ParamField;
 
@@ -55,8 +56,35 @@ public class WeightInfo implements TairaData {
     @ParamField(order = 15,length = 20)
     private String identify;
 
+    private static WeightInfo instance = null;
+
     public WeightInfo() {
     }
+
+    public static WeightInfo info(){
+        if (instance == null){
+            instance = new WeightInfo();
+        }
+        return instance;
+    }
+
+    public void toInfo(byte[] data){
+        if (data.length >= 34 * 2){
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public int getGross() {
         return gross;
@@ -184,5 +212,27 @@ public class WeightInfo implements TairaData {
 
     public void setIdentify(String identify) {
         this.identify = identify;
+    }
+
+    @Override
+    public String toString() {
+        return "WeightInfo{" +
+                "gross=" + gross +
+                ", tare=" + tare +
+                ", net=" + net +
+                ", sign1=" + sign1 +
+                ", sign2=" + sign2 +
+                ", lockGross=" + lockGross +
+                ", lockTare=" + lockTare +
+                ", grossCode=" + grossCode +
+                ", tareCode=" + tareCode +
+                ", netCode=" + netCode +
+                ", sumNet=" + sumNet +
+                ", sumCount=" + sumCount +
+                ", model=" + model +
+                ", hardVersion=" + hardVersion +
+                ", softVersion=" + softVersion +
+                ", identify='" + identify + '\'' +
+                '}';
     }
 }
