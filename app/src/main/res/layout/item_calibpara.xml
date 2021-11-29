@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/text_ParaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:ems="6"
+        android:padding="10dp"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/text_ParaValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/bg_weight_selector"
+        android:ems="6"
+        android:padding="10dp"
+        android:textSize="25sp" />
+
+    <com.github.gzuliyujiang.wheelpicker.widget.NumberWheelLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

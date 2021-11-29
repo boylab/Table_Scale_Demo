@@ -54,4 +54,9 @@ dependencies {
     implementation 'com.gotokeep.keep:taira:0.1.4'
     implementation files('libs/serialport.aar')
     implementation 'com.github.infiniteautomation:modbus4j:v3.0.5'
+
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.4'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.4'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:FilePicker:4.1.4'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:ColorPicker:4.1.4'
 }

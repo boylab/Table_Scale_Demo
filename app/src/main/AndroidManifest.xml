@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Table_Scale_Demo">
-        <activity android:name=".login.activity.UpdateActivity"></activity>
+        <activity android:name=".calib.activity.CalibWeightActivity"></activity>
+        <activity android:name=".calib.activity.CalibParaActivity" />
+        <activity android:name=".home.activity.MenuActivity" />
+        <activity android:name=".login.activity.UpdateActivity" />
         <activity android:name=".login.activity.LoginActivity" />
         <activity android:name=".login.activity.StartUpActivity" />
         <activity android:name=".home.activity.MainActivity">

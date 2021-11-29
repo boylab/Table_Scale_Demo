@@ -1,6 +1,8 @@
 package com.boylab.tablescale.base.modbus.data;
 
+import com.gotokeep.keep.taira.Taira;
 import com.gotokeep.keep.taira.TairaData;
+import com.gotokeep.keep.taira.annotation.ParamField;
 
 public class CalibScale implements TairaData {
 
@@ -19,37 +21,65 @@ public class CalibScale implements TairaData {
      * 0x004D 1 零点跟踪速度 1
      * 0x004E 1 补偿模式 0
      */
-
+    @ParamField(order = 0,length = 2)
     private int div;
+    @ParamField(order = 1,length = 2)
     private int point;
+    @ParamField(order = 2,length = 2)
     private int unit;
+    @ParamField(order = 3,length = 4)
     private int fullScale;
+    @ParamField(order = 4,length = 2)
     private int filterMode;
+    @ParamField(order = 5,length = 2)
     private int filterLevel;
+    @ParamField(order = 6,length = 2)
     private int bootZero;
+    @ParamField(order = 7,length = 2)
     private int manualZero;
-
+    @ParamField(order = 8,length = 2)
     private int zeroMode;
+    @ParamField(order = 9,length = 2)
     private int zeroRange;
+    @ParamField(order = 10,length = 2)
     private int zeroSpeed;
+    @ParamField(order = 11,length = 2)
     private int compensate; //补偿
+
+    private static CalibScale instance = null;
 
     public CalibScale() {
     }
 
-    public CalibScale(int div, int point, int unit, int fullScale, int filterMode, int filterLevel, int bootZero, int manualZero, int zeroMode, int zeroRange, int zeroSpeed, int compensate) {
-        this.div = div;
-        this.point = point;
-        this.unit = unit;
-        this.fullScale = fullScale;
-        this.filterMode = filterMode;
-        this.filterLevel = filterLevel;
-        this.bootZero = bootZero;
-        this.manualZero = manualZero;
-        this.zeroMode = zeroMode;
-        this.zeroRange = zeroRange;
-        this.zeroSpeed = zeroSpeed;
-        this.compensate = compensate;
+    public static CalibScale info(){
+        if (instance == null){
+            instance = new CalibScale();
+        }
+        return instance;
+    }
+
+    public void toCalib(byte[] data){
+        if (data.length >= 35 * 2){
+            CalibScale mCalibScale = Taira.DEFAULT.fromBytes(data, CalibScale.class);
+            if (mCalibScale != null){
+                this.freshInfo(mCalibScale);
+            }
+        }
+    }
+
+    private void freshInfo(CalibScale mCalibScale){
+        setDiv(mCalibScale.getDiv());
+        setPoint(mCalibScale.getPoint());
+        setUnit(mCalibScale.getUnit());
+        setFullScale(mCalibScale.getFullScale());
+        setFilterMode(mCalibScale.getFilterMode());
+        setFilterLevel(mCalibScale.getFilterLevel());
+        setBootZero(mCalibScale.getBootZero());
+        setManualZero(mCalibScale.getManualZero());
+        setZeroMode(mCalibScale.getZeroMode());
+        setZeroRange(mCalibScale.getZeroRange());
+        setZeroSpeed(mCalibScale.getZeroSpeed());
+        setCompensate(mCalibScale.getCompensate());
     }
 
     public int getDiv() {

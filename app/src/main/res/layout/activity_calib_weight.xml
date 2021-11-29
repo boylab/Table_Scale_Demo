@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".calib.activity.CalibWeightActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/layout_Weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:padding="20dp"
+        android:background="#177bbd">
+
+        <TextView
+            android:id="@+id/text_Label_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center"
+            android:text="重量:"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/text_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/text_Label_Weight"
+            android:ems="6"
+            android:gravity="center_vertical|right"
+            android:paddingRight="20dp"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <View
+            android:id="@+id/v_Line_Divider01"
+            android:layout_width="wrap_content"
+            android:layout_height="02dp"
+            android:layout_below="@+id/text_Label_Weight"
+            android:layout_alignLeft="@+id/text_Label_Weight"
+            android:layout_alignRight="@+id/text_Weight"
+            android:background="@android:color/white"
+            android:layout_marginVertical="10dp"/>
+
+        <TextView
+            android:id="@+id/text_Label_WeightCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center"
+            android:text="AD:"
+            android:layout_below="@+id/v_Line_Divider01"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/text_WeigherCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/text_Label_WeightCode"
+            android:ems="6"
+            android:gravity="center_vertical|right"
+            android:paddingRight="20dp"
+            android:text="0"
+            android:layout_below="@+id/v_Line_Divider01"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_below="@+id/layout_Weight">
+
+        <TextView
+            android:id="@+id/tv_Label_Calib_Zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1、清空秤台"
+            android:textColor="@android:color/black"
+            android:textSize="35sp"/>
+
+        <Button
+            android:id="@+id/btn_Calib_Zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_Label_Calib_Zero"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_calib_selector"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:ems="5"
+            android:text="标定零点"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tv_Label_Input_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Label_Calib_Zero"
+            android:layout_alignLeft="@+id/tv_Label_Calib_Zero"
+            android:layout_marginTop="30dp"
+            android:text="2、加载砝码"
+            android:textColor="@android:color/black"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/btn_Input_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_Calib_Zero"
+            android:layout_alignBaseline="@+id/tv_Label_Input_Weight"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_calib_selector"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:ems="5"
+            android:text="下一步"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+
+        <TextView
+            android:id="@+id/tv_Input_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/btn_Input_Weight"
+            android:layout_alignTop="@+id/btn_Input_Weight"
+            android:layout_alignBottom="@+id/btn_Input_Weight"
+            android:background="@drawable/bg_weight_selector"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="numberSigned"
+            android:text="0"
+            android:ems="5"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_Label_Calib_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Label_Input_Weight"
+            android:layout_alignLeft="@+id/tv_Label_Calib_Zero"
+            android:layout_marginTop="30dp"
+            android:text="3、内码稳定后、按“标定”"
+            android:textColor="@android:color/black"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/btn_Calib_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_Label_Calib_Weight"
+            android:layout_alignLeft="@+id/btn_Calib_Zero"
+            android:layout_alignRight="@+id/btn_Calib_Zero"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_calib_selector"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="标定"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_Calib_PreStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Label_Calib_Weight"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/darker_gray"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="上一步"
+            android:ems="5"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

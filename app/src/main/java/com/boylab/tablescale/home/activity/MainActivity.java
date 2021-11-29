@@ -11,13 +11,13 @@ import com.boylab.tablescale.base.modbus.data.WeightInfo;
 import com.boylab.tablescale.base.modbus.master.SerialMaster;
 import com.boylab.tablescale.base.modbus.socket.Command;
 import com.boylab.tablescale.base.modbus.socket.ModbusEngine;
+import com.boylab.tablescale.base.view.ScaleView;
 import com.serotonin.modbus4j.msg.ModbusResponse;
 import com.serotonin.modbus4j.msg.ReadInputRegistersResponse;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView text_Weigh;
-
+    private ScaleView scaleView;
 
     private WeightInfo weightInfo = WeightInfo.info();
 
@@ -28,9 +28,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        text_Weigh = findViewById(R.id.text_Weigh);
-
-
+        scaleView = findViewById(R.id.scaleView);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onFreshView(int what, ModbusResponse response) {
         if (what == Command.readInfo){
-            text_Weigh.setText(String.valueOf(weightInfo.getNet()));
+            scaleView.freshWeight(weightInfo);
         }
     }
 

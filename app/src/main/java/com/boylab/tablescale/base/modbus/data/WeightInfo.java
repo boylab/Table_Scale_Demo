@@ -56,8 +56,8 @@ public class WeightInfo implements TairaData {
     @ParamField(order = 15,length = 20)
     private String identify;
 
-    private WeighSign1 weighSign1 = null;
-    private WeighSign2 weighSign2 = null;
+    private WeighSign1 weighSign1 = new WeighSign1();;
+    private WeighSign2 weighSign2 = new WeighSign2();
 
     private static WeightInfo instance = null;
 
@@ -103,6 +103,13 @@ public class WeightInfo implements TairaData {
         return gross;
     }
 
+    public String grossFormat() {
+        int point = weighSign1.getPoint();
+        double realGross = gross / Math.pow(10, point);
+        String formatWeigh = String.format("%6."+point+"f", realGross);
+        return formatWeigh;
+    }
+
     public void setGross(int gross) {
         this.gross = gross;
     }
@@ -111,12 +118,35 @@ public class WeightInfo implements TairaData {
         return tare;
     }
 
+    public String tareFormat() {
+        int point = weighSign1.getPoint();
+        double realTare = tare / Math.pow(10, point);
+        String formatWeigh = String.format("%6."+point+"f", realTare);
+        return formatWeigh;
+    }
+
     public void setTare(int tare) {
         this.tare = tare;
     }
 
     public int getNet() {
         return net;
+    }
+
+    public String netFormat() {
+        //return net;
+        int point = weighSign1.getPoint();
+        double realNet = net / Math.pow(10, point);
+        String formatWeigh = String.format("%6."+point+"f", realNet);
+        /*String grossValue = String.valueOf(gross);
+        for (int i = 0; i < point; i++) {
+            if (!grossValue.matches("^-?\\d+.\\d{"+point+"}$")){
+                grossValue = grossValue.concat("0");
+            }else {
+                break;
+            }
+        }*/
+        return formatWeigh;
     }
 
     public void setNet(int net) {
@@ -129,6 +159,7 @@ public class WeightInfo implements TairaData {
 
     public void setSign1(int sign1) {
         this.sign1 = sign1;
+        weighSign1.setSign(this.sign1);
     }
 
     public int getSign2() {
@@ -137,21 +168,14 @@ public class WeightInfo implements TairaData {
 
     public void setSign2(int sign2) {
         this.sign2 = sign2;
+        weighSign2.setSign(this.sign2);
     }
 
     public WeighSign1 weighSign1() {
-        if (weighSign1 == null){
-            weighSign1 = new WeighSign1();
-        }
-        weighSign1.setSign(this.sign1);
         return weighSign1;
     }
 
     public WeighSign2 weighSign2() {
-        if (weighSign2 == null){
-            weighSign2 = new WeighSign2();
-        }
-        weighSign2.setSign(this.sign2);
         return weighSign2;
     }
 

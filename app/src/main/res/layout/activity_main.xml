@@ -6,13 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".home.activity.MainActivity">
 
+    <TextClock
+        android:id="@+id/clock_Time"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="#FFFF0000"
+        android:layout_marginLeft="10dp"
+        android:background="#4576A8"
+        android:format12Hour="yyyy-MM-dd HH:mm:ss"
+        android:format24Hour="yyyy-MM-dd HH:mm:ss"
+        android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/text_Weigh"
-        android:layout_width="wrap_content"
+    <com.boylab.tablescale.base.view.ScaleView
+        android:id="@+id/scaleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/clock_Time"
+        android:layout_above="@+id/ll_Bottom_View"
+        android:background="#FFFFFF" />
+
+    <LinearLayout
+        android:id="@+id/ll_Bottom_View"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="123456"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:paddingHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="horizontal"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btn_MenuFunc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_Home_Menu"
+            android:text="菜单"
+            android:drawableLeft="@drawable/home_menu"/>
+
+        <Button
+            android:id="@+id/btn_Record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_Home_Menu"
+            android:text="记录"
+            android:drawableLeft="@drawable/home_record"/>
+
+        <Button
+            android:id="@+id/btn_Print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_Home_Menu"
+            android:text="保存"
+            android:drawableLeft="@drawable/home_print"/>
+
+        <Button
+            android:id="@+id/btn_Tare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_Home_Menu"
+            android:text="去皮"
+            android:drawableLeft="@drawable/home_tare"/>
+
+        <Button
+            android:id="@+id/btn_Zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/style_Home_Menu"
+            android:text="置零"
+            android:drawableLeft="@drawable/home_zero"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

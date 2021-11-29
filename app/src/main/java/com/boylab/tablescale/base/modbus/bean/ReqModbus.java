@@ -17,7 +17,7 @@ public class ReqModbus {
     private boolean writeBool;      //写单个线圈
 
     private short[] writeValue;    //写多个保持寄存器
-    private boolean[] writeBools;      //写多个线圈
+    private boolean[] writeBools;  //写多个线圈
 
     /**
      * 读寄存器命令

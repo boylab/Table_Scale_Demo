@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:orientation="horizontal">
+
+    <com.boylab.tablescale.base.view.WeightView
+        android:id="@+id/view_Net_Weight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/ll_Right_View"
+        android:layout_above="@+id/weight_Status"/>
+
+    <LinearLayout
+        android:id="@+id/ll_Right_View"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <com.boylab.tablescale.base.view.WeightView
+            android:id="@+id/view_Gross_Weight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.boylab.tablescale.base.view.WeightView
+            android:id="@+id/view_Tare_Weight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <com.boylab.tablescale.base.view.WeightStatus
+        android:id="@+id/weight_Status"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/ll_Right_View"/>
+
+</RelativeLayout>
