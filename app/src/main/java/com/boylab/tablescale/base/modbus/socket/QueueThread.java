@@ -55,7 +55,7 @@ public class QueueThread extends AbsLoopThread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (modbusListener != null){
+        if (mResponse !=null && modbusListener != null){
             modbusListener.onResponse(reqModbus.what(), mResponse);
         }
     }

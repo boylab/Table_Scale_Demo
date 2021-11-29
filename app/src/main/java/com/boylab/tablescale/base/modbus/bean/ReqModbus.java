@@ -8,7 +8,7 @@ public class ReqModbus {
 
     private int funcCode;   //用于区分是什么命令
 
-    private int slaveId;
+    private int slaveId = 1;
     private int start;
 
     private int len;    //读寄存器个数

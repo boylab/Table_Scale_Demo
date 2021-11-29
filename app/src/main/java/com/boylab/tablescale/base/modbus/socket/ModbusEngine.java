@@ -27,7 +27,10 @@ public class ModbusEngine {
     }
 
     public boolean isStart() {
-        return queueManager.isShutdown();
+        if (queueManager!=null){
+            return !queueManager.isShutdown();
+        }
+        return false;
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.boylab.tablescale.base.modbus.data;
 
-import com.boylab.tablescale.base.modbus.socket.ModbusEngine;
+import com.gotokeep.keep.taira.Taira;
 import com.gotokeep.keep.taira.TairaData;
 import com.gotokeep.keep.taira.annotation.ParamField;
 
@@ -56,6 +56,9 @@ public class WeightInfo implements TairaData {
     @ParamField(order = 15,length = 20)
     private String identify;
 
+    private WeighSign1 weighSign1 = null;
+    private WeighSign2 weighSign2 = null;
+
     private static WeightInfo instance = null;
 
     public WeightInfo() {
@@ -69,22 +72,32 @@ public class WeightInfo implements TairaData {
     }
 
     public void toInfo(byte[] data){
-        if (data.length >= 34 * 2){
-
+        if (data.length >= 35 * 2){
+            WeightInfo mWeightInfo = Taira.DEFAULT.fromBytes(data, WeightInfo.class);
+            if (mWeightInfo != null){
+                this.freshInfo(mWeightInfo);
+            }
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    private void freshInfo(WeightInfo mWeightInfo){
+        setGross(mWeightInfo.getGross());
+        setTare(mWeightInfo.getTare());
+        setNet(mWeightInfo.getNet());
+        setSign1(mWeightInfo.getSign1());
+        setSign2(mWeightInfo.getSign2());
+        setLockGross(mWeightInfo.getLockGross());
+        setLockTare(mWeightInfo.getLockTare());
+        setGrossCode(mWeightInfo.getGrossCode());
+        setTareCode(mWeightInfo.getTareCode());
+        setNetCode(mWeightInfo.getNetCode());
+        setSumNet(mWeightInfo.getSumNet());
+        setSumCount(mWeightInfo.getSumCount());
+        setModel(mWeightInfo.getModel());
+        setHardVersion(mWeightInfo.getHardVersion());
+        setSoftVersion(mWeightInfo.getSoftVersion());
+        setIdentify(mWeightInfo.getIdentify());
+    }
 
     public int getGross() {
         return gross;
@@ -124,6 +137,22 @@ public class WeightInfo implements TairaData {
 
     public void setSign2(int sign2) {
         this.sign2 = sign2;
+    }
+
+    public WeighSign1 weighSign1() {
+        if (weighSign1 == null){
+            weighSign1 = new WeighSign1();
+        }
+        weighSign1.setSign(this.sign1);
+        return weighSign1;
+    }
+
+    public WeighSign2 weighSign2() {
+        if (weighSign2 == null){
+            weighSign2 = new WeighSign2();
+        }
+        weighSign2.setSign(this.sign2);
+        return weighSign2;
     }
 
     public int getLockGross() {

@@ -32,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements ModbusLi
     protected abstract void initView();
     protected abstract void initData();
 
+    protected abstract void onFreshView(int what, ModbusResponse response);
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -54,7 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ModbusLi
          * WriteRegistersResponse
          *
          */
-
         if (response instanceof ReadInputRegistersResponse){
             ReadInputRegistersResponse inputResponse = (ReadInputRegistersResponse) response;
             byte[] data = inputResponse.getData();
@@ -66,5 +67,11 @@ public abstract class BaseActivity extends AppCompatActivity implements ModbusLi
             ReadCoilsResponse coilsResponse = (ReadCoilsResponse) response;
             // TODO: 2021/11/26
         }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onFreshView(what, response);
+            }
+        });
     }
 }

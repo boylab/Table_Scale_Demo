@@ -37,7 +37,8 @@ public class QueueManager extends AbsLoopThread {
          * 100毫秒运行一次
          */
         if (mQueue.isEmpty()){
-            mQueue.add(Command.getCmd(Command.readInfo));
+            ReqModbus reqModbus = Command.getCmd(Command.readInfo);
+            mQueue.add(reqModbus);
         }
     }
 
