@@ -118,7 +118,7 @@ public class RecyclerUtil {
          * @param color
          */
         public GridDecoration(int color) {
-            this(color, 2, false, false);
+            this(color, 1, false, false);
             this.isStandard = false;
         }
 
@@ -127,7 +127,7 @@ public class RecyclerUtil {
          * @param color
          */
         public GridDecoration(int color, boolean isDrawTop, boolean isDrawSide) {
-            this(color, 2, isDrawTop, isDrawSide);
+            this(color, 1, isDrawTop, isDrawSide);
         }
 
         public GridDecoration(int color, int offset, boolean isDrawTop, boolean isDrawSide) {

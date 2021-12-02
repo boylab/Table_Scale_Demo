@@ -3,6 +3,7 @@ package com.boylab.tablescale.home.activity;
 import android.serialport.SerialPort;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.boylab.tablescale.R;
@@ -18,6 +19,7 @@ import com.serotonin.modbus4j.msg.ReadInputRegistersResponse;
 public class MainActivity extends BaseActivity {
 
     private ScaleView scaleView;
+    private Button btn_MenuFunc, btn_Record, btn_Print, btn_Tare, btn_Zero;
 
     private WeightInfo weightInfo = WeightInfo.info();
 
@@ -29,6 +31,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         scaleView = findViewById(R.id.scaleView);
+        btn_MenuFunc = findViewById(R.id.btn_MenuFunc);
+        btn_Record = findViewById(R.id.btn_Record);
+        btn_Print = findViewById(R.id.btn_Print);
+        btn_Tare = findViewById(R.id.btn_Tare);
+        btn_Zero = findViewById(R.id.btn_Zero);
     }
 
     @Override

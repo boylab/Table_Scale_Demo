@@ -28,7 +28,7 @@
     <LinearLayout
         android:id="@+id/ll_Bottom_View"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -40,7 +40,7 @@
         <Button
             android:id="@+id/btn_MenuFunc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="@style/style_Home_Menu"
             android:text="菜单"
             android:drawableLeft="@drawable/home_menu"/>
@@ -48,7 +48,7 @@
         <Button
             android:id="@+id/btn_Record"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="@style/style_Home_Menu"
             android:text="记录"
             android:drawableLeft="@drawable/home_record"/>
@@ -56,7 +56,7 @@
         <Button
             android:id="@+id/btn_Print"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="@style/style_Home_Menu"
             android:text="保存"
             android:drawableLeft="@drawable/home_print"/>
@@ -64,7 +64,7 @@
         <Button
             android:id="@+id/btn_Tare"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="@style/style_Home_Menu"
             android:text="去皮"
             android:drawableLeft="@drawable/home_tare"/>
@@ -72,7 +72,7 @@
         <Button
             android:id="@+id/btn_Zero"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="@style/style_Home_Menu"
             android:text="置零"
             android:drawableLeft="@drawable/home_zero"/>

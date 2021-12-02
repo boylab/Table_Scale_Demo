@@ -1,6 +1,7 @@
 package com.boylab.tablescale.calib.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,44 +12,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.boylab.tablescale.R;
+import com.boylab.tablescale.base.utils.Config;
 import com.boylab.tablescale.base.utils.ViewClick;
 import com.boylab.tablescale.calib.bean.ParaUnit;
+import com.github.gzuliyujiang.wheelpicker.NumberPicker;
 import com.github.gzuliyujiang.wheelpicker.OptionPicker;
+import com.github.gzuliyujiang.wheelpicker.contract.OnNumberPickedListener;
+import com.github.gzuliyujiang.wheelpicker.contract.OnNumberSelectedListener;
 import com.github.gzuliyujiang.wheelpicker.contract.OnOptionPickedListener;
 import com.github.gzuliyujiang.wheelpicker.contract.OnOptionSelectedListener;
 import com.github.gzuliyujiang.wheelpicker.widget.OptionWheelLayout;
 import com.github.gzuliyujiang.wheelview.annotation.CurtainCorner;
+import com.github.gzuliyujiang.wheelview.contract.WheelFormatter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyViewHolder> implements OnOptionPickedListener {
+public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyViewHolder> implements OnOptionPickedListener, OnNumberPickedListener {
 
-    private Activity context;
+    private Activity mActivity;
+    private List<ParaUnit> paraList = null;
 
-    private List<ParaUnit> paraList = new ArrayList<ParaUnit>(){{
-        add(new ParaUnit("参数1", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数2", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数3", ParaUnit.INPUT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数4", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数5", ParaUnit.INPUT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数6", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数7", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数8", ParaUnit.INPUT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数9", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数10", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数11", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数12", ParaUnit.SELECT, 0, new String[]{"", ""}));
-        add(new ParaUnit("参数13", ParaUnit.SELECT, 0, new String[]{"", ""}));
-    }};
-
-    private List<Integer> calibPara ;
     private AdapterView.OnItemClickListener onItemClickListener;
     private int selectUnit = 0;
 
-    public CalibParaAdapter(Activity context, List<Integer> calibPara) {
-        this.context = context;
-        this.calibPara = calibPara;
+    public CalibParaAdapter(Activity mActivity, List<ParaUnit> paraList) {
+        this.mActivity = mActivity;
+        this.paraList = paraList;
     }
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
@@ -58,19 +47,27 @@ public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.item_calibpara, null);
+        View rootView = LayoutInflater.from(mActivity).inflate(R.layout.item_calibpara, null);
         return new MyViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ParaUnit paraUnit = paraList.get(position);
-
         holder.text_ParaLabel.setText(paraUnit.getLabel());
         if (paraUnit.getAction() == ParaUnit.INPUT){
-            holder.text_ParaValue.setText(String.valueOf(paraUnit.getValue()));
+            int point = paraList.get(1).getValue();
+            String unit = Config.UNIT[paraList.get(2).getValue()];
+            String fullScale = String.format("%6."+point+"f ", paraUnit.getValue()/Math.pow(10, point)) + unit;
+            holder.text_ParaValue.setText(fullScale);
         }else {
-            holder.text_ParaValue.setText(paraUnit.getSelectValues());
+            if (position == 0){
+                holder.text_ParaValue.setText(String.valueOf(paraUnit.getValue()));
+            }else if (position == 7 || position == 8){
+                holder.text_ParaValue.setText(String.format("%d %%", paraUnit.getValue()));
+            }else {
+                holder.text_ParaValue.setText(paraUnit.getSelectValues());
+            }
         }
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,15 +82,19 @@ public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyVi
                     // TODO: 2021/11/30 输入数值
 
 
-                    notifyItemChanged(selectUnit);
+
+
+                    notifyDataSetChanged();
                 }else {
-                    float density = view.getResources().getDisplayMetrics().scaledDensity;
-                    showWheel(paraUnit, density);
+                    if (selectUnit == 7 || selectUnit == 8){
+                        showNumberWheel(paraUnit);
+                    }else {
+                        float density = view.getResources().getDisplayMetrics().scaledDensity;
+                        showWheel(paraUnit, density);
+                    }
                 }
             }
         });
-
-
     }
 
     @Override
@@ -101,8 +102,29 @@ public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyVi
         return paraList.size();
     }
 
+    public void showNumberWheel(ParaUnit paraUnit) {
+        NumberPicker picker = new NumberPicker(mActivity);
+        picker.setOnNumberPickedListener(CalibParaAdapter.this);
+        picker.getWheelLayout().setOnNumberSelectedListener(new OnNumberSelectedListener() {
+            @Override
+            public void onNumberSelected(int position, Number item) {
+                picker.getTitleView().setText(paraUnit.getLabel() +" ( "+ picker.getWheelView().formatItem(position)+" ) ");
+            }
+        });
+        picker.setFormatter(new WheelFormatter() {
+            @Override
+            public String formatItem(@NonNull Object item) {
+                return item.toString() + " %";
+            }
+        });
+        picker.setRange(0, 100, 1);
+        picker.setDefaultValue(paraUnit.getValue());
+        picker.setTitle("身高选择");
+        picker.show();
+    }
+
     private void showWheel(ParaUnit paraUnit, float density){
-        OptionPicker picker = new OptionPicker(context);
+        OptionPicker picker = new OptionPicker(mActivity);
         picker.setTitle(paraUnit.getLabel());
         picker.setBodyWidth(140);
         picker.setData(paraUnit.getShowValues());
@@ -124,7 +146,7 @@ public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyVi
         wheelLayout.setOnOptionSelectedListener(new OnOptionSelectedListener() {
             @Override
             public void onOptionSelected(int position, Object item) {
-                picker.getTitleView().setText(picker.getWheelView().formatItem(position));
+                picker.getTitleView().setText(paraUnit.getLabel() +" ( "+ picker.getWheelView().formatItem(position)+" ) ");
             }
         });
         picker.show();
@@ -132,11 +154,14 @@ public class CalibParaAdapter extends RecyclerView.Adapter<CalibParaAdapter.MyVi
 
     @Override
     public void onOptionPicked(int position, Object item) {
-        /**
-         * 选择的结果
-         */
         paraList.get(selectUnit).setValue(position);
-        notifyItemChanged(selectUnit);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onNumberPicked(int position, Number item) {
+        paraList.get(selectUnit).setValue(position);
+        notifyDataSetChanged();
     }
 
     protected class MyViewHolder extends RecyclerView.ViewHolder {

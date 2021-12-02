@@ -34,16 +34,18 @@ public class CalibScale implements TairaData {
     @ParamField(order = 5,length = 2)
     private int filterLevel;
     @ParamField(order = 6,length = 2)
-    private int bootZero;
+    private int stableRange;
     @ParamField(order = 7,length = 2)
-    private int manualZero;
+    private int bootZero;
     @ParamField(order = 8,length = 2)
-    private int zeroMode;
+    private int manualZero;
     @ParamField(order = 9,length = 2)
-    private int zeroRange;
+    private int zeroMode;
     @ParamField(order = 10,length = 2)
-    private int zeroSpeed;
+    private int zeroRange;
     @ParamField(order = 11,length = 2)
+    private int zeroSpeed;
+    @ParamField(order = 12,length = 2)
     private int compensate; //补偿
 
     private static CalibScale instance = null;
